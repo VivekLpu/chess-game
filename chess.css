@@ -1,0 +1,309 @@
+
+
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	background: rgb(54, 50, 50);
+}
+
+/* Game container with sidebar */
+.game-container {	
+    display: flex;
+    justify-content: center; /* center board + sidebar horizontally */
+    align-items: flex-start; /* align top edges */
+    gap: 50px; /* space between sidebar and board */
+    max-width: 1200px;
+    margin: 20px auto; /* center container on page */
+}
+
+/* Sidebar styling */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-family: 'Poppins', sans-serif;
+    padding-right: 30px;
+    border-right: 2px solid #ccc; /* vertical separator */
+}
+
+/* Heading style */
+.sidebar h1 {
+    font-size: 48px;
+    color: #0e9cc7;   /* blue heading */
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Subtext style */
+.sidebar p {
+    font-size: 18px;
+    color: #555;
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive for small screens */
+@media screen and (max-width: 800px) {
+    .game-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .sidebar {
+        border-right: none;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 20px;
+        padding-right: 0;
+        align-items: center;
+        text-align: center;
+    }
+
+    .sidebar h1 {
+        font-size: 36px;
+    }
+
+    .sidebar p {
+        font-size: 16px;
+    }
+}
+
+
+.board-container {	
+	width: 600px;
+	max-width: 90%;
+	justify-content: center;
+	margin: auto;
+	position: relative;
+}
+.semataries {
+	width: 100%;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+}
+.sematary {
+	width: 50%;
+}
+#blackSematary {
+	text-align: right;
+}
+#board {
+	aspect-ratio: 1 / 1;
+	margin: auto;
+	border: 3px #333 solid;
+}
+#board div div {
+	float: left;
+	width: calc(100% / 8);
+	aspect-ratio: 1 / 1;
+	box-sizing: border-box;
+	border: #000 solid .01cm;
+	transition: background 0.3s ease;
+}
+
+#board .even div:nth-child(even) {
+	background: #EEEED2;
+}
+#board .even div:nth-child(odd) {
+	background: #769656;
+}
+#board .odd div:nth-child(even) {
+	background: #769656;
+}
+#board .odd div:nth-child(odd) {
+	background: #EEEED2;	
+}
+
+/* Smooth animations */
+img.piece {
+	width: 100%;
+	height: 100%;
+	float: left;
+	transition: transform 0.3s ease-in-out;
+}
+
+/* Highlight allowed moves with glowing pulse */
+.allowed {
+	opacity: .9;
+	background: radial-gradient(#ffeb3b, #fbc02d) !important;
+	border: 2px solid #ff9800 !important;
+	animation: pulseAllowed 1s infinite;
+}
+@keyframes pulseAllowed {
+	0% { box-shadow: 0 0 5px #ff9800; }
+	50% { box-shadow: 0 0 15px #ff9800; }
+	100% { box-shadow: 0 0 5px #ff9800; }
+}
+
+/* Last move highlight */
+.last-move {
+	background: #30b030 !important;
+}
+.clicked-square {
+	background: radial-gradient(#333,#222 ) !important;
+	border: 1px solid black !important;
+}
+
+/* Captured pieces animation */
+.sematary img {
+	width: 1.8rem;
+	height: 1.8rem;
+	transform: scale(0);
+	animation: dropIn 0.3s ease forwards;
+}
+@keyframes dropIn {
+	100% { transform: scale(1); }
+}
+#blackSematary div {
+	overflow-y: auto;
+	margin-bottom: 2px;
+}
+
+/* Board rotation */
+.animate {
+	animation: rotateBoard 1s ease-out;
+	animation-fill-mode: both;
+}
+@keyframes rotateBoard { 
+	0% { transform: rotateZ(0); }
+	100% { transform: rotateZ(-180deg); }
+}
+.forward { transform: rotateZ(-180deg); }
+.backward { transform: rotateZ(0); }
+.animate-backward {
+	animation: rotateBoardBackward 1s ease-out;
+	animation-fill-mode: both;
+}
+@keyframes rotateBoardBackward { 
+	0% { transform: rotateZ(-180deg); }
+	100% { transform: rotateZ(0); }
+}
+
+/* Overlay scenes */
+.scene {
+	position: relative;
+	opacity: 0;
+	display: none;
+	z-index: 1;
+}
+.overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	opacity: .7;
+	z-index: 1;
+}
+.scene .scene-content {
+	position: fixed;
+	color: #fff;
+	z-index: 2;
+	width: 100%;
+	text-align: center;
+	margin-top: 40vh;
+	font-size: 40px;
+	height: 100vh;
+	animation: popIn 0.8s ease forwards;
+	transform: scale(0.8);
+	opacity: 0;
+}
+@keyframes popIn {
+	100% { transform: scale(1); opacity: 1; }
+}
+.scene-content h2 {
+	font-weight: 500;
+	margin-bottom: 15px;
+}
+@media screen and (max-width: 600px) {
+	.scene-content h2 {
+		font-size: 2rem;
+	}
+}
+.show {
+	display: block !important;
+	animation: showMessage 1s ease-out;
+	animation-fill-mode: both;
+}
+.hidden { display: none; }
+@keyframes showMessage { 
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+/* Turn indicator */
+#turn {
+	color: #dfb9b9;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	margin: 10px 0;
+	transition: color 0.4s ease, transform 0.3s ease;
+}
+.turn-white { color: #2196f3; transform: scale(1.1); }
+.turn-black { color: #e53935; transform: scale(1.1); }
+
+.winning-sign:first-letter {
+	text-transform: uppercase;
+}
+
+/* Buttons */
+.flip-board {
+	padding: 10px 20px;
+	border-radius: 5px !important;
+	outline: 0;
+	background: #0e9cc7;
+	color: white;
+	border: 0;
+	transition: background 0.3s ease, transform 0.2s ease;
+}
+.flip-board:hover {
+	background: #546e7a;
+	transform: scale(1.05);
+}
+
+/* Game mode buttons */
+input[type="radio"] {
+	display: none;
+}
+label {
+	background-color: rgb(112,112,112);
+	position: relative;
+	font-family: "Poppins", sans-serif;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.8em;
+	padding: 1em 2em;
+	border-radius: 0.5em;
+	font-size: 23px;
+	transition: background 0.3s ease;
+}
+input[type="radio"]:checked + label {
+	background-color: #4189e0;
+	color: #ffffff;
+}
+.button {
+	background-color: rgb(112,112,112);
+	border-radius: 10px;
+	border: none;
+	color: white;
+	padding: 20px 40px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 20px;
+	cursor: pointer;
+	transition: background 0.3s ease, transform 0.2s ease;
+}
+.button:hover, label:hover {
+	background-color: rgb(160, 160, 160);
+	transform: scale(1.05);
+}
+.button-big {
+	padding: 30px 60px;
+	font-size: 25px;
+}
