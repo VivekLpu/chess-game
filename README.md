@@ -46,11 +46,11 @@ cd chess-game
 # Run the game
 Open index.html in your browser
 
+⭐ If you found this project useful, don’t forget to give it a star!
+
+
 👨‍💻 Author
 <h3 align="center">Vivek Kumar</h3> 
 <p align="center"> <a href="https://viveklpu.github.io/Portfolio-Website/"> 🌐 Portfolio </a> • <a href="https://www.linkedin.com/in/vivek-kumar87/"> 💼 LinkedIn </a> • <a href="https://leetcode.com/u/Vivek_LPU/"> 🏆 LeetCode </a> </p>
 
-
-
-⭐ If you found this project useful, don’t forget to give it a star!
 
