@@ -2,7 +2,7 @@
 
 A fully functional **Chess Game** built using **HTML, CSS, and JavaScript**.  
 Features smooth gameplay, drag-and-drop pieces, and animations inspired by **Chess.com** for a professional user experience.
-
+------------
 ---
 
 ## 🚀 Features
